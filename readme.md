@@ -53,6 +53,7 @@ Where status = '404 NOT FOUND'
 group by date;
 
 4. Run python script:
+
 python2.7 Logs_Analysis.py 
 
 

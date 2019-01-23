@@ -1,0 +1,7 @@
+
+Most popular three articles of all time:
+	*[['candidate-is-jerk'], ['bears-love-berries'], ['bad-things-gone']]
+Most popular three article authors of all time:
+	*[['Anonymous Contributor'], ['Ursula La Multa'], ['Rudolf von Treppenwitz']]
+Days which more than 1% of requests lead to errors:
+	*[[datetime.date(2016, 7, 17)]]

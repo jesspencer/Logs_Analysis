@@ -39,7 +39,8 @@ From authors
 Join top_three_articles 
 On top_three_articles.author = authors.id 
 Group By authors.name, top_three_articles.views 
-Order By top_three_articles.views;
+Order By top_three_articles.views
+desc limit 3;
 
 Create View requests as 
 Select date(time) as date, count(*) as http_requests 

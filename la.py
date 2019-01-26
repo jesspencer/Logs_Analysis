@@ -2,57 +2,54 @@
 
 '#importing standard library for postgres'
 import psycopg2
-import psycopg2.extras
 
-text_file = open("results_file.txt", "w")
-text_file.truncate()
+'#database'
 
-'#connecting to database'
+DBNAME = "news"
 
-conn = psycopg2.connect("dbname=news")
-dict_cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+'#querying the database' 
 
-'#Created top_three_articles view, then ran query'
-dict_cur.execute("select top_three_articles.slug from top_three_articles;")
-top_three_articles = dict_cur.fetchall()
+query_1 = 'select * from top_three_articles;'
 
-'#Created top_three_authors view, then ran query'
-dict_cur.execute("select top_three_authors.name from top_three_authors;")
-top_three_authors = dict_cur.fetchall()
+query_2 = 'select * from top_three_authors;'
 
-'#Created requests view and errors view, and then ran query'
-dict_cur.execute("""
+
+query_3 = """
 select r.date from requests r join errors e on r.date
 = e.date where e.http_404::numeric/r.http_requests * 100 > 1
-group by r.date, e.http_404, r.http_requests;""")
-top_log_errors = dict_cur.fetchall()
+group by r.date, e.http_404, r.http_requests;"""
 
-'#printing results to txt file'
-print "Writing to text file ..."
+'#answering questions about data' 
 
-'#opening textfile and setting up textfile to write results'
-text_file = open("results_file.txt", "w")
+ques1 = 'Ques 1: What are the most popular three articles of all time?'
+ques2 = 'Ques 2: Who are the most popular article authors of all time?'
+ques3 = 'Ques 3: On which days did more than 1% of requests lead to errors?'
 
-print "Erasing results of any previous query..."
-text_file.truncate()
+'#function call to run script'
 
-'#heading and input for most popular three articles'
-line1 = """
-Most popular three articles of all time:
-""" + "\t*" + "%s \n" % (top_three_articles)
+if __name__ == '__main__':
+    conn = psycopg2.connect(database=DBNAME)
+    curr = conn.cursor()
+    
+    curr.execute(query_1)
+    res = curr.fetchall()
+    print ques1
+    for i in range(len(res)):
+        print i+1, ')', res[i][0], '--', res[i][2] 
+    print''
 
-line2 = """
-Most popular three article authors of all time:
-""" + "\t*" "%s \n" % (top_three_authors)
-line3 = """
-Days which more than 1% of requests lead to errors:
-""" + "\t*" + "%s \n" % (top_log_errors)
+    curr.execute(query_2)
+    res = curr.fetchall()
+    print ques2
+    for i in range(len(res)):
+        print i+1, ')', res[i][0], '--', res[i][1]
+    print ''
+    
+    curr.execute(query_3)
+    res = curr.fetchall()
+    print ques3
+    for i in range(len(res)):
+        print i+1, ')', res[i][0]
+    print ''
 
-text_file.write(line1)
-text_file.write(line2)
-text_file.write(line3)
-
-conn.close()
-text_file.close()
-
-print "results_file.txt has been created"
+    conn.close()

@@ -10,8 +10,7 @@ Requirements:
 
 1. Python 2.7.15 
 2. psycopg2
-3. psycopg2.extras
-4. Postgresql 9.6
+3. Postgresql 9.6
 
 How to run: 
 
@@ -55,6 +54,8 @@ group by date;
 
 4. Run python script:
 
-python2.7 Logs_Analysis.py 
+python2 la.py
+
+5. Text file la.py_results.txt shows the output that you should get from running the la.py file.  
 
 

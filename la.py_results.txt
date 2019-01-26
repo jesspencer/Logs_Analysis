@@ -1,0 +1,12 @@
+Ques 1: What are the most popular three articles of all time?
+1 ) candidate-is-jerk -- 338647
+2 ) bears-love-berries -- 253801
+3 ) bad-things-gone -- 170098
+
+Ques 2: Who are the most popular article authors of all time?
+1 ) Rudolf von Treppenwitz -- 338647
+2 ) Ursula La Multa -- 253801
+3 ) Anonymous Contributor -- 170098
+
+Ques 3: On which days did more than 1% of requests lead to errors?
+1 ) 2016-07-17

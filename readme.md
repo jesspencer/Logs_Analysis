@@ -52,6 +52,14 @@ From log
 Where status = '404 NOT FOUND' 
 group by date;
 
+Create View error_percentage as 
+Select q1.date as date,
+round(q1.errors::numeric,2) as error_percent 
+From (select r.date as date,
+e.http_404::numeric/r.http_requests*100 as errors
+From requests r join errors e on r.date = e.date
+Group By r.date, e.http_404, r.http_requests) as q1;
+
 4. Run python script:
 
 python2 la.py

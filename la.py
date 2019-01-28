@@ -14,10 +14,7 @@ query_1 = 'select * from top_three_articles;'
 query_2 = 'select * from top_three_authors;'
 
 
-query_3 = """
-select r.date from requests r join errors e on r.date
-= e.date where e.http_404::numeric/r.http_requests * 100 > 1
-group by r.date, e.http_404, r.http_requests;"""
+query_3 = 'select * from error_percentage where error_percent > 1;'
 
 '#answering questions about data'
 
@@ -49,7 +46,7 @@ if __name__ == '__main__':
     res = curr.fetchall()
     print ques3
     for i in range(len(res)):
-        print i+1, ')', res[i][0]
+        print i+1, ')', res[i][0], '--', res[i][1],'%errors'
     print ''
 
     conn.close()

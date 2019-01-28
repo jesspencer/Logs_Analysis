@@ -1,4 +1,6 @@
-Logs_Analysis
+# Logs_Analysis
+## Project Description
+This project sets up a mock PostgreSQL database for a fictional news website. The provided Python script uses the psycopg2 library to query the database and produce a report that answers the following three questions:
 
 Questions:
 
@@ -12,27 +14,41 @@ Requirements:
 2. psycopg2
 3. Postgresql 9.6
 
+
 How to run: 
 
-1. Load the data into the database:
+1. Create a Database named "news": 
+
+launch the psql console: psql
+
+create an empty news database: CREATE DATABASE news;
+
+exit psql console: \q
+
+2. Get newsdata.sql file with the database schema and data: 
+
+[newsdata.sql file can be downloaded with this link](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip) 
+
+3. Load the data into the database:
 
 psql -d news -f newsdata.sql
 
-2. Connect to the database:
+4. Connect to the database:
 
 psql -d news
 
-3. Create views:
+5. Create views:
 
-Create View top_three_articles as 
+'''sql Create View top_three_articles as 
 Select a.slug, a.author, count(a.slug) as views 
 From articles a, log l 
 Where a.slug = substring(l.path,10) and l.status = '200 OK' 
 Group By a.slug, a.author 
 Order by views 
 desc limit 3; 
+'''
 
-Create View top_three_authors as 
+'''sql Create View top_three_authors as 
 Select authors.name, top_three_articles.views 
 From authors 
 Join top_three_articles 
@@ -40,30 +56,32 @@ On top_three_articles.author = authors.id
 Group By authors.name, top_three_articles.views 
 Order By top_three_articles.views
 desc limit 3;
+'''
 
-Create View requests as 
+'''sql Create View requests as 
 Select date(time) as date, count(*) as http_requests 
 From log 
 group by date;
+'''
 
-Create View errors as 
+'''sql Create View errors as 
 Select date(time) as date, count(*) as http_404 
 From log 
 Where status = '404 NOT FOUND' 
 group by date;
+'''
 
-Create View error_percentage as 
+'''sql Create View error_percentage as 
 Select q1.date as date,
 round(q1.errors::numeric,2) as error_percent 
 From (select r.date as date,
 e.http_404::numeric/r.http_requests*100 as errors
 From requests r join errors e on r.date = e.date
 Group By r.date, e.http_404, r.http_requests) as q1;
+'''
 
-4. Run python script:
+6. Run python script:
 
 python2 la.py
 
-5. Text file la.py_results.txt shows the output that you should get from running the la.py file.  
-
-
+7. Text file la.py_results.txt shows the output that you should get from running the la.py file.  

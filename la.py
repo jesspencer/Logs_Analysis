@@ -48,7 +48,8 @@ if __name__ == '__main__':
     print ques3
     for i in range(len(res)):
     	objDate = datetime.strptime(str(res[i][0]), '%Y-%m-%d')
-        print i+1, ')',datetime.strftime(objDate,'%b %d, %Y'), '--', str(res[i][1]) + '%','errors'
+    	longdate = datetime.strftime(objDate, '%b %d, %Y')
+        print i+1, ')', longdate,'--', str(res[i][1]) + '%','errors'
     print ''
 
     conn.close()

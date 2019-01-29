@@ -9,4 +9,4 @@ Ques 2: Who are the most popular article authors of all time?
 3 ) Anonymous Contributor -- 170098
 
 Ques 3: On which days did more than 1% of requests lead to errors?
-1 ) 2016-07-17 -- 2.26 %errors
+1 ) Jul 17, 2016 -- 2.26% errors

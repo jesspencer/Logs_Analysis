@@ -49,13 +49,20 @@ ORDER BY views DESC
 LIMIT 3; 
 '''
 
-'''sql CREATE VIEW top_three_authors AS 
-SELECT authors.name, top_three_articles.views 
-FROM authors 
-JOIN top_three_articles 
-ON top_three_articles.author = authors.id 
-GROUP BY authors.name, top_three_articles.views 
-ORDER BY top_three_articles.views DESC 
+'''sql CREATE VIEW article_views AS 
+SELECT count(log.path) AS views, articles.author AS author_number
+FROM log, articles
+WHERE substring(log.path, 10) = articles.slug
+GROUP BY articles.author
+ORDER BY views DESC;
+'''
+
+'''sql CREATE VIEW top_three_authors AS
+SELECT authors.name AS name,
+article_views.views AS views
+FROM authors JOIN article_views 
+ON authors.id = article_views.author_number
+ORDER BY views DESC
 LIMIT 3;
 '''
 
@@ -81,7 +88,7 @@ JOIN errors e
 ON r.date = e.date
 GROUP BY r.date, e.http_404, r.http_requests) AS q1;
 '''
-
+i
 6. Run python script:
 
 python2 la.py

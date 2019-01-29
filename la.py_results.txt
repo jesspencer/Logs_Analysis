@@ -4,8 +4,8 @@ Ques 1: What are the most popular three articles of all time?
 3 ) Bad things gone, say good people -- 170098
 
 Ques 2: Who are the most popular article authors of all time?
-1 ) Rudolf von Treppenwitz -- 338647
-2 ) Ursula La Multa -- 253801
+1 ) Ursula La Multa -- 507594
+2 ) Rudolf von Treppenwitz -- 423457
 3 ) Anonymous Contributor -- 170098
 
 Ques 3: On which days did more than 1% of requests lead to errors?

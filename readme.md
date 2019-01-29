@@ -39,7 +39,7 @@ psql -d news
 
 5. Create views:
 
-'''sql CREATE VIEW top_three_articles AS 
+```sql CREATE VIEW top_three_articles AS 
 SELECT a.title, a.author, count(a.slug) AS views 
 FROM articles a, log l 
 WHERE a.slug = substring(l.path,10) 
@@ -47,39 +47,39 @@ AND l.status = '200 OK'
 GROUP BY a.title, a.author 
 ORDER BY views DESC 
 LIMIT 3; 
-'''
+```
 
-'''sql CREATE VIEW article_views AS 
+```sql CREATE VIEW article_views AS 
 SELECT count(log.path) AS views, articles.author AS author_number
 FROM log, articles
 WHERE substring(log.path, 10) = articles.slug
 GROUP BY articles.author
 ORDER BY views DESC;
-'''
+```
 
-'''sql CREATE VIEW top_three_authors AS
+```sql CREATE VIEW top_three_authors AS
 SELECT authors.name AS name,
 article_views.views AS views
 FROM authors JOIN article_views 
 ON authors.id = article_views.author_number
 ORDER BY views DESC
 LIMIT 3;
-'''
+```
 
-'''sql CREATE VIEW requests AS 
+```sql CREATE VIEW requests AS 
 SELECT date(time) as date, count(*) AS http_requests 
 FROM log 
 GROUP BY date;
-'''
+```
 
-'''sql CREATE VIEW errors AS 
+```sql CREATE VIEW errors AS 
 SELECT date(time) AS date, count(*) AS http_404 
 FROM log 
 WHERE status = '404 NOT FOUND' 
 GROUP BY date;
-'''
+```
 
-'''sql CREATE VIEW error_percentage AS 
+```sql CREATE VIEW error_percentage AS 
 SELECT q1.date AS date,round(q1.errors::numeric,2) AS error_percent 
 FROM (SELECT r.date AS date,
 e.http_404::numeric/r.http_requests*100 AS errors
@@ -87,8 +87,8 @@ FROM requests r
 JOIN errors e 
 ON r.date = e.date
 GROUP BY r.date, e.http_404, r.http_requests) AS q1;
-'''
-i
+```
+
 6. Run python script:
 
 python2 la.py

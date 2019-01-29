@@ -2,7 +2,7 @@
 
 # importing standard library for postgres
 import psycopg2
-from datetime import datetime 
+from datetime import datetime
 
 '#database'
 

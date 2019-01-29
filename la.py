@@ -47,9 +47,9 @@ if __name__ == '__main__':
     res = curr.fetchall()
     print ques3
     for i in range(len(res)):
-    	objDate = datetime.strptime(str(res[i][0]), '%Y-%m-%d')
-    	longdate = datetime.strftime(objDate, '%b %d, %Y')
-        print i+1, ')', longdate,'--', str(res[i][1]) + '%','errors'
+        objDate = datetime.strptime(str(res[i][0]), '%Y-%m-%d')
+        longdate = datetime.strftime(objDate, '%b %d, %Y')
+        print i+1, ')', longdate, '--', str(res[i][1]) + '%', 'errors'
     print ''
 
     conn.close()

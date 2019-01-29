@@ -2,6 +2,7 @@
 
 # importing standard library for postgres
 import psycopg2
+from datetime import datetime 
 
 '#database'
 
@@ -46,7 +47,8 @@ if __name__ == '__main__':
     res = curr.fetchall()
     print ques3
     for i in range(len(res)):
-        print i+1, ')', res[i][0], '--', res[i][1], '%errors'
+    	objDate = datetime.strptime(str(res[i][0]), '%Y-%m-%d')
+        print i+1, ')',datetime.strftime(objDate,'%b %d, %Y'), '--', res[i][1],'%errors'
     print ''
 
     conn.close()

@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 
-'#importing standard library for postgres'
+# importing standard library for postgres
 import psycopg2
 
 '#database'
